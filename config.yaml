@@ -1,0 +1,27 @@
+resources:
+  - type: compute.v1.instance
+    name: vm
+    properties:
+      zone: us-central1-f
+      machineType: projects/sample-dm-demo/zones/us-central1-f/machineTypes/f1-micro
+      metadata:
+        items:
+          - key: gce-container-declaration
+            value: "spec:\n  containers:\n    - name: instance-1\n      image: strm/helloworld-http\n      stdin: false\n      tty: false\n  restartPolicy: Always\n\n"
+      tags:
+        items: ["http-server"]
+      disks:
+        - deviceName: boot
+          type: PERSISTENT
+          boot: true
+          autoDelete: true
+          initializeParams:
+            sourceImage: projects/cos-cloud/global/images/cos-stable-77-12371-114-0
+      networkInterfaces:
+        - network: https://www.googleapis.com/compute/v1/projects/sample-dm-demo/global/networks/default
+          accessConfigs:
+            - name: External NAT
+              type: ONE_TO_ONE_NAT
+outputs:
+  - name: IPAddress
+    value: $(ref.vm.networkInterfaces[0].accessConfigs[0].natIP)
