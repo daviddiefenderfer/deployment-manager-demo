@@ -24,7 +24,7 @@ Now that there is a project and a valid config we're
 ready to begin with deploying our app via `gcloud`.
 
 
-###Deploying with `gcloud`cli:
+### Deploying with `gcloud`cli:
 
 For this part we see the expected `Outputs` behavior per the [documentation](https://cloud.google.com/deployment-manager/docs/configuration/expose-information-outputs) by deploying via `gcloud`.
  
@@ -45,7 +45,7 @@ We can delete this now to re-deploy the same config from the api-go-client
 
 `gcloud deployment-manager deployments delete hello-world`
 
-###Deploying with google-api-go-client
+### Deploying with google-api-go-client
 The go program written here is very basic and prints out the json response from a successful
 deployment. As you will see, this deployment will not return any "FinalValues" or "Outputs" properties
 
@@ -59,6 +59,6 @@ and set it with the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 You will see here the Resource response aligns well with the expected response per the [API](https://cloud.google.com/deployment-manager/docs/reference/latest/resources) docs. 
 We don't see anything regarding the Outputs value is any of the API models. 
 
-###Conclusion
+### Conclusion
 The response from deploying via CLI provides a desirable "Outputs" property that is either unavailable
 in the api-go-client library or is not in an intuitive location to access.
